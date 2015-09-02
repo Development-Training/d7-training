@@ -1,0 +1,27 @@
+<?php
+/**
+ * implement hook_menu()
+ * create menu item and 
+ */
+//implements hooks menu
+require_once("detective.menu.permission.inc");
+
+function detective_landing() {
+   //global $user;
+  //echo "<pre>";print_r($user);echo "</pre>";
+    return "I am ready... <span style='color:red;font-weight:bold;'>thrill</span> has been started!!";
+}
+
+function detective_new() {
+    //echo "";echo "</pre>";
+    return "<h1>Add Detective Page</h1> <p>This Page is used to add <span style='color:red;font-weight:bold;'>Detective</span> "
+    . "Now thrill has been started!!";
+}
+
+function detective_view() {
+    return "<h1>View Detective Page</h1> <p>This Page Contains information regards <span style='color:red;font-weight:bold;'>Detective.</span></p>"
+    . "Now thrill has been started!!";
+}
+function detective_init() {
+}
+?>

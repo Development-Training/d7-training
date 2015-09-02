@@ -1,0 +1,5 @@
+name = Detective Info
+description = "Manage Detective Info"
+package = fiction
+core = 7.x
+config = admin/config/detective

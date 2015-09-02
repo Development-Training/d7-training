@@ -1,0 +1,107 @@
+<?php
+function detective_schema() {  
+//here key "fc_detectives" is the name of table.
+$schema = array();
+$schema['fc_detectives'] = array(
+    'description' => 'Table to store detective information.',
+    'fields' => array(
+        'detective_id' => array(
+        'description' => 'The primary identifier for a detective.',
+        'type' => 'serial',
+        'not null' => TRUE,
+        ),
+        'name' => array(
+                'description' => 'name of detective.',
+                'type' => 'varchar',
+                'length' => 255,
+        ),
+        'series_id' => array(
+                'description' => 'detective description.',
+                'type' => 'int',
+        ),
+        'intro' => array(
+                'description' => 'detective intro',
+                'type' => 'text',
+        ),
+        'is_available' => array(
+                'description' => 'detective is available or not',
+                'type' => 'int',
+                'size' => 'tiny',
+        ),
+        'created' => array(
+                'description' => 'created',
+                'type' => 'int',
+        ),
+        'modified' => array(
+                'description' => 'modified',
+                'type' => 'int',
+        ),
+        'modified_by' => array(
+                'description' => 'modified by',
+                'type' => 'int',
+    ),
+),
+ 'primary key' => array('detective_id'),
+'indexes' => array(
+        'series_id' => array('series_id'),
+),
+);
+$schema['fc_inspiration_series'] = array(
+    'description' => 'Table to store detective information.',
+    'fields' => array(
+        'series_id' => array(
+        'description' => 'The primary identifier for a detective series.',
+        'type' => 'serial',
+        'not null' => TRUE,
+        ),
+        'title' => array(
+                'description' => 'The current {node_revision}.vid version identifier.',
+                'type' => 'varchar',
+                'length' => 255,
+        ),
+        'description' => array(
+                'description' => 'The {node_type} of this node.',
+                'type' => 'text',
+        ),
+        'author' => array(
+                'description' => 'The title of this node, always treated as non-markup plain text.',
+                'type' => 'varchar',
+                'length' => 255,
+        ),
+    ),
+    'primary key' => array('series_id'),
+  );
+  return $schema;
+}
+function detective_install() {
+$values = array(
+  array(
+    'title' => 'Imran Series',
+    'description' => 'Ali Imran and pakasia secret service series',
+    'author' => 'Ibn-e-Safi',
+  ),
+  array(
+    'title' => 'Colonel Faridi',
+    'description' => 'Col Faridi series published as jasoosidunya',
+    'author' => 'Ibn-e-Safi',
+  ),
+  array(
+    'title' => 'Inspector Jamshaid',
+    'description' => 'Mahmood Farooq Farzana and Inspector Jamshaid series for children',
+    'author' => 'Ishtiaq Ahmed',
+  ),
+  array(
+    'title' => 'Inspector Khalid',
+    'description' => 'Abdul Bari and Inspector Khalid series for women',
+    'author' => 'Saadat Hasan Mantoo',
+    ),
+);
+
+$query = db_insert('fc_inspiration_series')->fields(array('title', 'description', 'author'));
+foreach ($values as $record) {
+  $query->values($record);
+}
+$query->execute();
+drupal_set_message(t('Custome Module named as <b>Detective</b> is now installed.'));
+}
+?>
